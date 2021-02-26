@@ -24,8 +24,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button1 = findViewById(R.id.button1)
-        button1!!.setOnClickListener { //token create
+        button1!!.setOnClickListener {
 
+            //token create
             val obj = HS256()
             val token: String = obj.createToken("daeseong.com", "14852700000".toLong(), true, "userId1234567890", "daeseong")
             Log.e(tag, "createToken token:$token")
