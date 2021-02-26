@@ -45,8 +45,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         button2 = findViewById(R.id.button2)
-        button2!!.setOnClickListener { //token create
-
+        button2!!.setOnClickListener { 
+          
+           //token create
             val obj = RSA()
             val token: String = obj.createToken("daeseong.com", "14852700000".toLong(), true, "userId1234567890", "daeseong")
             Log.e(tag, "createToken token:$token")
