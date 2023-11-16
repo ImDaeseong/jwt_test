@@ -17,13 +17,14 @@ import java.security.spec.X509EncodedKeySpec
 
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-class RSA() {
+class RSA {
 
     private val tag = RSA::class.java.simpleName
 
     private val sPWD = "password1234567890"
 
     fun createToken(iss: String?, exp: Long?, http: Boolean?, userId: String?, userName: String?): String {
+
         var token = ""
 
         try {
@@ -32,7 +33,7 @@ class RSA() {
             header["alg"] = "RS256"
             header["typ"] = "JWT"
 
-            val PrivKey = rsaPrivateKey()
+            val privKey  = rsaPrivateKey()
             //val publicKey = rsaPublicKey()
 
             token = JWT.create()
@@ -42,7 +43,7 @@ class RSA() {
                 .withClaim("https://daeseong.com/jwt", http)
                 .withClaim("userId", userId)
                 .withClaim("userName", userName)
-                .sign(Algorithm.RSA256(PrivKey))
+                .sign(Algorithm.RSA256(privKey))
 
         } catch (ex: Exception) {
             ex.message.toString()
@@ -80,7 +81,8 @@ class RSA() {
 
     @Throws(InvalidKeySpecException::class, NoSuchAlgorithmException::class)
     fun getHeader(sToken: String?): String {
-        var Header = ""
+
+        var header = ""
 
         try {
 
@@ -88,16 +90,17 @@ class RSA() {
             val algorithm = Algorithm.RSA256(publicKey, null)
             val verifier = JWT.require(algorithm).build()
             val jwt = verifier.verify(sToken)
-            Header = String(Base64.decode(jwt.header, Base64.URL_SAFE))
+            header = String(Base64.decode(jwt.header, Base64.URL_SAFE))
 
         } catch (exception: JWTVerificationException) {
-            exception.message.toString()
+            Log.e(tag, "Error getting header", exception)
         }
-        return Header
+        return header
     }
 
     @Throws(InvalidKeySpecException::class, NoSuchAlgorithmException::class)
     fun getPayload(sToken: String?): String {
+
         var payload = ""
 
         try {
@@ -106,10 +109,11 @@ class RSA() {
             val algorithm = Algorithm.RSA256(publicKey, null)
             val verifier = JWT.require(algorithm).build()
             val jwt = verifier.verify(sToken)
+
             payload = String(Base64.decode(jwt.payload, Base64.URL_SAFE))
 
         } catch (exception: JWTVerificationException) {
-            exception.message.toString()
+            Log.e(tag, "Error getting payload", exception)
         }
         return payload
     }
@@ -164,6 +168,7 @@ class RSA() {
                     "zbT8ck23rwZmLxsgC+Xw22j8WNmBFDSmkW6ymkdu1zqneV1IVfkPhHtw/i2Sa77P" +
                     "Q6M3HKUQantoFFRXXECVH4Up")
         //"-----END PRIVATE KEY-----\n";
+
         val decodedKey = Base64.decode(keyString, Base64.DEFAULT)
         val ks = PKCS8EncodedKeySpec(decodedKey)//decoder.decode(keyString))
         val kf = KeyFactory.getInstance("RSA")

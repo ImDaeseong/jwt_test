@@ -2,7 +2,6 @@ package com.daeseong.jwt_android;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-
 
 public class MainActivity extends AppCompatActivity {
 

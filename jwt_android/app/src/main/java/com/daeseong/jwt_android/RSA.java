@@ -2,15 +2,12 @@ package com.daeseong.jwt_android;
 
 import android.os.Build;
 import android.util.Log;
-
 import androidx.annotation.RequiresApi;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
