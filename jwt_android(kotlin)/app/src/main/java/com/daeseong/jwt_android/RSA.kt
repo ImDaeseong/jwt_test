@@ -15,7 +15,6 @@ import java.security.spec.InvalidKeySpecException
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 
-
 @RequiresApi(api = Build.VERSION_CODES.O)
 class RSA {
 
